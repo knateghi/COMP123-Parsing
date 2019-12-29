@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace COMP123_Parsing
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
 
             //testing the "TryParse()
@@ -30,7 +30,8 @@ namespace COMP123_Parsing
             ////testing the "OUT" keyboard by entering an array:
             //DisplayStrings("Koby");
             //DisplayStrings("Ahmed", "Koby", "Reyhan");
-            Console.WriteLine(readUntilEnd()); 
+            Console.WriteLine(ReadUntilEnd(5) );
+            ReadUntilEnd();
             Console.ReadKey();
         }
         public static void InputMethod(out int firstNum, out int secondNum)
@@ -58,30 +59,71 @@ namespace COMP123_Parsing
         * this method keeps reading from the console until the "end" word is entered
         * 
         */
-        public static string[] readUntilEnd()
+        public static int ReadUntilEnd(int numberOfEntries)
         {
-            string[] inputs = new string[50];
+            string[] inputs = new string[numberOfEntries];
             int inputCounte = 0;
             
             do
             {
-                Console.Write("Enter your name or end to exit: ");
+                Console.Write("Enter a value or end to exit: ");
+                inputs[inputCounte] = "";
                 inputs[inputCounte] = Console.ReadLine();
-                if (inputs[inputCounte]=="end")
+                
+                inputCounte++;
+                
+
+            } while ((inputs[inputCounte-1]!="end") && (inputCounte<numberOfEntries));
+
+            //PrintTheArray(inputs);
+            return inputCounte;
+
+
+        }
+
+
+        /*
+         * This method allows the user to enter five string
+         * and place them into a string array
+         * 
+         * @method ReadUntilEnd
+         * @return {int}
+         */
+        public static string[] ReadUntilEnd()
+        {
+            int numberOfEntries = 5;
+            string[] inputs = new string[numberOfEntries];
+            int inputCounte = 0;
+
+            do
+            {
+                Console.Write("Enter a value or end to exit: ");
+                inputs[inputCounte] = "";
+                inputs[inputCounte] = Console.ReadLine();
+
+                inputCounte++;
+
+
+            } while ((inputs[inputCounte - 1] != "end") && (inputCounte < numberOfEntries));
+
+            //PrintTheArray(inputs);
+            return inputs;
+
+
+        }
+        public static void PrintTheArray(params string[] array)
+        {
+            Console.WriteLine("Here iss teh array: ");
+            foreach(string myArray in array)
+            {
+                if (myArray.Equals("end"))
                 {
-                    inputCounte = -1;
                     break;
                 }
-                else
-                {
-                    inputCounte++;
-                }
-
-            } while (inputCounte != -1);
-            
-             return inputs;
-            
-
+                Console.Write($"{myArray} ");
+               
+            }
         }
     }
 }
+    
